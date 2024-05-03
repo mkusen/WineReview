@@ -24,9 +24,10 @@ price decimal(10,2),
 review varchar (255)
 );
 
-create table reviewer_wine(
+create table tasting(
 id_reviewer int,
-id_wine int
+id_wine int,
+id_place int
 );
 
 create table admin(
@@ -35,4 +36,11 @@ email varchar (50),
 pass varchar(20),
 firstname varchar(20),
 lastname varchar(20)
+);
+
+create table place(
+id int,
+state varchar(50),
+city varchar(50),
+place varchar(50)
 );
