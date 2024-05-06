@@ -7,6 +7,7 @@ go
 use wine_review;
 go
 
+--osoba koja piše recenziju
 create table reviewer(
 id int,
 email varchar (50),
@@ -15,6 +16,7 @@ firstname varchar(20),
 lastname varchar(20)
 );
 
+--vino koje se opisuje
 create table wine(
 id int,
 maker varchar(20),
@@ -30,6 +32,7 @@ id_wine int,
 id_place int
 );
 
+--administrator web servisa
 create table admin(
 id int,
 email varchar (50),
@@ -38,9 +41,11 @@ firstname varchar(20),
 lastname varchar(20)
 );
 
+--mjesto događaja na kojem je recenzent kušao vino
 create table place(
 id int,
-state varchar(50),
+country varchar(50),
 city varchar(50),
-place varchar(50)
+place_name varchar(50),
+event varchar(50)
 );
