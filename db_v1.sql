@@ -47,5 +47,5 @@ id int,
 country varchar(50),
 city varchar(50),
 place_name varchar(50),
-event varchar(50)
+event_name varchar(50)
 );
