@@ -13,7 +13,7 @@ id int not null primary key identity(1,1),
 email varchar (50) not null,
 pass char (32) not null,
 firstname varchar(20) not null,
-lastname varchar(20)
+lastname varchar(20) not null
 );
 
 --vino koje se opisuje
