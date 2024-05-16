@@ -22,8 +22,7 @@ id int not null primary key identity(1,1),
 maker varchar(20) not null,
 wine_name varchar (20) not null,
 year_of_harvest int not null,
-price decimal(10,2),
-review varchar (255) not null
+price decimal(10,2)
 );
 
 --događaj na kojem je recenzent kušao vino
@@ -40,6 +39,7 @@ create table tasting (
 id_reviewer int not null,
 id_wine int not null,
 id_event_place int not null,
+review varchar (255) not null
 foreign key (id_reviewer) references reviewers (id),
 foreign key (id_wine) references wines (id),
 foreign key (id_event_place) references event_places (id)
