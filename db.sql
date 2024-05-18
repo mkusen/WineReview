@@ -22,7 +22,8 @@ id int not null primary key identity(1,1),
 maker varchar(20) not null,
 wine_name varchar (20) not null,
 year_of_harvest int not null,
-price decimal(10,2)
+price decimal(10,2),
+picture varchar(255)
 );
 
 --događaj na kojem je recenzent kušao vino
@@ -46,6 +47,4 @@ foreign key (id_wine) references wines (id),
 foreign key (id_event_place) references event_places (id)
 );
 
---podaci o adminu web stranice
-insert into reviewers (email, pass, firstname, lastname) values ('kusen.mario@gmail.com', HashBytes ('MD5', 'admin'), 'Mario', 'Kušen');
 
