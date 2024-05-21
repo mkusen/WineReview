@@ -22,8 +22,9 @@ id int not null primary key identity(1,1),
 maker varchar(20) not null,
 wine_name varchar (20) not null,
 year_of_harvest int not null,
-price decimal(10,2),
-picture varchar(255)
+price decimal(10,2)
+--ne treba slika ovdje  
+--picture varchar(255)
 );
 
 --događaj na kojem je recenzent kušao vino
@@ -37,6 +38,7 @@ event_name varchar(50)
 
 --spaja recenzenta, vino i event (mjesto) kušanja
 create table tasting (
+id int not null primary key identity (1,1),
 id_reviewer int not null,
 id_wine int not null,
 id_event_place int not null,
