@@ -23,8 +23,6 @@ maker varchar(20) not null,
 wine_name varchar (20) not null,
 year_of_harvest int not null,
 price decimal(10,2)
---ne treba slika ovdje  
---picture varchar(255)
 );
 
 --događaj na kojem je recenzent kušao vino
@@ -32,7 +30,7 @@ create table event_places(
 id int not null primary key identity(1,1),
 country varchar(50) not null,
 city varchar(50) not null,
-place_name varchar(50),
+place_name varchar(50) not null,
 event_name varchar(50)
 );
 
