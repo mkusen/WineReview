@@ -21,7 +21,7 @@ create table wines(
 id int not null primary key identity(1,1),
 maker varchar(20) not null,
 wine_name varchar (20) not null,
-year_of_harvest int not null,
+year_of_harvest varchar(5) not null,
 price decimal(10,2)
 );
 

@@ -21,7 +21,7 @@ insert into wines (maker, wine_name, year_of_harvest, price) values ('Krauthaker
 ('Josić', 'Merlot', '2019', 22.95),
 ('Josić', 'Pinot bijeli', '2022', 11.50);
 
-select * from wines;
+--select * from wines;
 
 insert into event_places (country, city,place_name, event_name) values ('hr', 'Osijek', 'Crna svinja', ''),
 ('hr', 'Vardarac', 'Citadela',''),
@@ -32,7 +32,7 @@ insert into event_places (country, city,place_name, event_name) values ('hr', 'O
 
 --select * from event_places;
 
-select * from event_places as e inner join reviewers as r on e.id=r.id inner join wines as w on w.id=r.id;
+--select * from event_places as e inner join reviewers as r on e.id=r.id inner join wines as w on w.id=r.id;
 
 insert into tasting (id_reviewer, id_wine, id_event_place, review, event_date) values (1,1,1,'vrhunsko bijelo vino','2024-02-01'),
 (2,2,2,'vrhunsko bijelo vino','2024-02-02'),
@@ -49,7 +49,13 @@ insert into tasting (id_reviewer, id_wine, id_event_place, review, event_date) v
 
 --select * from tasting;
 
-select t.id, r.firstname, r.lastname, e.place_name, e.city, event_date, wine_name, year_of_harvest from tasting as t join reviewers as r on t.id=r.id
-join wines as w on t.id=w.id
-join event_places as e on t.id=e.id
-where t.id=3;
+-- select t.id, r.firstname, r.lastname, e.place_name, e.city, event_date, wine_name, year_of_harvest from tasting as t join reviewers as r on t.id=r.id
+-- join wines as w on t.id=w.id
+-- join event_places as e on t.id=e.id
+-- where t.id=3;
+
+-- select d.city, d.place_name, d.event_name, b.maker, b.wine_name, a.review from 
+-- tasting a inner join wines b on b.id = a.id_wine 
+-- inner join reviewers c on c.id = a.id_reviewer 
+-- inner join event_places d on d.id = a.id_event_place 
+-- where b.maker LIKE '%kr%';
