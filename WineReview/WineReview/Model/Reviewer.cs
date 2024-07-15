@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace WineReview.Model
 {
-    internal class Reviewers : Entity
+    internal class Reviewer : Entity
     {
         public string Email { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }
-        public string  LastName { get; set; }
+        public string LastName { get; set; }
     }
 }

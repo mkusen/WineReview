@@ -1,6 +1,4 @@
 ﻿
+using WineReview;
 
-
-
-
-
+MainMenu.Start();

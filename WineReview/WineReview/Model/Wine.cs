@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WineReview.Model
 {
-    internal class Wines : Entity
+    internal class Wine : Entity
     {
         public string Maker { get; set; }
         public string WineName { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WineReview.Model
 {
-    internal class EventPlaces : Entity
+    internal class EventPlace : Entity
     {
         public string Country { get; set; }
         public string City { get; set; }
