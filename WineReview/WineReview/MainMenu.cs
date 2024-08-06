@@ -16,27 +16,28 @@ namespace WineReview
         public static void Start()
         {
             Console.WriteLine("***********************\n" +
-                              "Dobrodošli u aplikaciju\n " +
+                              "Dobrodošli u aplikaciju\n" +
                               "za ljubitelje vina\n" +
                               "***********************\n");
             
             Console.Write("Molim unesite svoje ime: ");
-            string FirstName = Console.ReadLine().Trim().ToLower();
+            string FirstName = Console.ReadLine().Trim();
             Console.Write("Molim unesite svoje prezime: ");
-            string LastName = Console.ReadLine().Trim().ToLower();
+            string LastName = Console.ReadLine().Trim();
 
-            Console.WriteLine("Pozdrav {0} {1}", FirstName, LastName);
 
-            Menu();
+            Auxiliary.TestInputName("", FirstName, LastName);
+                      
+
+            //Menu();
         }
 
 
         /// <summary>
         /// Main menu
-        /// </summary>
         /// From user asks to pick one entry
-        /// 
-        private static void Menu()
+        /// </summary>        
+        public static void Menu()
         {
             Console.WriteLine("Glavni izbornik: \n1.Popis događaja\n2.Vina\n3.Recenzije");
 
@@ -44,6 +45,7 @@ namespace WineReview
             {
                 case 1:
                     Console.WriteLine("upisan 1");
+
                     break;
                 case 2:
                     Console.WriteLine("upisan 2");

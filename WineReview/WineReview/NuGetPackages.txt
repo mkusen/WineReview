@@ -1,0 +1,5 @@
+﻿https://www.nuget.org/packages/System.Text.RegularExpressions/4.3.1?_src=template
+
+https://www.nuget.org/packages/Newtonsoft.Json/13.0.3?_src=template
+
+https://www.nuget.org/packages/Faker.Net/2.0.163?_src=template
