@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WineReview.Controller;
 
 namespace WineReview
 {
@@ -13,8 +14,10 @@ namespace WineReview
 
         }
 
-        public static void Start()
+        public void Start()
         {
+
+          
             Console.WriteLine("***********************\n" +
                               "Dobrodošli u aplikaciju\n" +
                               "za ljubitelje vina\n" +
@@ -24,28 +27,26 @@ namespace WineReview
             string FirstName = Console.ReadLine().Trim();
             Console.Write("Molim unesite svoje prezime: ");
             string LastName = Console.ReadLine().Trim();
-
-
             Auxiliary.TestInputName("", FirstName, LastName);
-                      
-
-            //Menu();
+          
         }
 
 
         /// <summary>
         /// Main menu
-        /// From user asks to pick one entry
+        /// asks users to pick one entry
         /// </summary>        
         public static void Menu()
         {
-            Console.WriteLine("Glavni izbornik: \n1.Popis događaja\n2.Vina\n3.Recenzije");
+            Console.WriteLine("*****************\n" +
+                "Glavni izbornik: \n1.Popis događaja\n2.Vina\n3.Recenzije\n" +
+                "*****************");
 
             switch (Auxiliary.TestInputNumbers("Molim odabrati", 1, 3))
             {
                 case 1:
-                    Console.WriteLine("upisan 1");
-
+                    //Console.WriteLine("upisan 1");
+                    ProcessingEventPlace.ShowEventsMenu();
                     break;
                 case 2:
                     Console.WriteLine("upisan 2");

@@ -12,5 +12,17 @@ namespace WineReview.Model
         public string City { get; set; }
         public string PlaceName { get; set; }
         public string EventName { get; set; }
+
+
+        public override string ToString()
+        {
+            return "Id: " +  Id +  ", Country: " + Country + ", City: " + City + ", PlaceName: " + PlaceName + 
+                ", EventName: " + EventName + " ";
+        }
+
+
     }
+
+
+
 }

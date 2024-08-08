@@ -1,20 +1,32 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using WineReview.Controller;
+using WineReview.Model;
 
 namespace WineReview
 {
     internal class Auxiliary
     {
-
+        ProcessingEventPlace ProcessingEventPlace { get; set; }
 
         public Auxiliary()
         {
+            ProcessingEventPlace = new ProcessingEventPlace();  
+        }
 
+        internal static void GetId()
+        {
+            
+            
+            
+            
+            throw new NotImplementedException();
         }
 
 
@@ -29,7 +41,7 @@ namespace WineReview
                Regex.IsMatch(lastName, @"^[a-zA-Z]+$") == true)
             {
 
-                Console.WriteLine("Pozdrav {0} {1}", firstName, lastName);
+                Console.WriteLine("\nPozdrav {0} {1}\n", firstName, lastName);
                 MainMenu.Menu();
             }
 
@@ -67,5 +79,49 @@ namespace WineReview
                 }
             }
         }
+
+        /// <summary>
+        /// Loads saved data at app start
+        /// </summary>
+        public void LoadData()
+        {
+            string docPath =
+         Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            try
+            {
+                if (File.Exists(Path.Combine(docPath, "data.json")))
+                {
+                    StreamReader file = File.OpenText(Path.Combine(docPath, "data.json"));
+                    ProcessingEventPlace.Events = JsonConvert.DeserializeObject<List<EventPlace?>>(file.ReadToEnd());
+
+                }
+            }
+            catch (Exception)
+            {
+
+                Console.WriteLine("Lista događaja je prazna");
+            }
+            
+
+        }
+
+        /// <summary>
+        /// Save entered data at app close or at user request
+        /// </summary>
+        private void SaveData()
+        {
+            
+
+            string docPath =
+          Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "data.json"));
+            outputFile.WriteLine(JsonConvert.SerializeObject(ProcessingEventPlace.Events));
+            outputFile.Close();
+        }
+
+
+
     }
 }
