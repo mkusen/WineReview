@@ -16,6 +16,7 @@ namespace WineReview.Controller
         public ProcessingEventPlace()
         {
             Events = new List<EventPlace>();
+          
         }
 
         /// <summary>
@@ -37,7 +38,9 @@ namespace WineReview.Controller
 
         private void SelectedMenuOption()
         {
-          switch(Auxiliary.TestInputNumbers("Odaberite stavku izbornika", 1,5))
+            MainMenu mainMenu = new MainMenu();
+
+            switch (Auxiliary.TestInputNumbers("Odaberite stavku izbornika", 1,5))
             {
                 case 1:
                     EventList();
@@ -52,7 +55,7 @@ namespace WineReview.Controller
                     DeleteEvent();
                     break;
                 case 5:
-                    MainMenu.Menu();
+                    mainMenu.Menu();
                     break;
             }
 
@@ -70,10 +73,7 @@ namespace WineReview.Controller
             Auxiliary.GetId();
             Console.Write("Dodaj novi događaj: ");
             string NewEvent = Console.ReadLine().Trim();
-            //Smjerovi.Add(new() { Naziv = "Web programiranje" });
             Events.Add(new() {EventName = NewEvent });
-            //Console.WriteLine(NewEvent);
-
            
         }
 

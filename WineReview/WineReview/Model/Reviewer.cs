@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Faker;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,13 @@ namespace WineReview.Model
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public override string ToString()
+        {
+            return "Id: " + Id + ", Email: " + Email + ", Password: " + Password + ", FirstName: " + FirstName +
+                ", LastName: " + LastName + " ";
+        }
+
+
     }
 }

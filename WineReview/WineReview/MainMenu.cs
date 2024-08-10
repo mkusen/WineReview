@@ -9,25 +9,34 @@ namespace WineReview
 {
     internal class MainMenu
     {
+        
+
         public MainMenu()
         {
-
+             
         }
 
-        public void Start()
+        public static void Start()
         {
+            var ProcessingReviewer = new ProcessingReviewer();
+            var Auxiliary = new Auxiliary();
 
-          
             Console.WriteLine("***********************\n" +
                               "Dobrodošli u aplikaciju\n" +
                               "za ljubitelje vina\n" +
                               "***********************\n");
-            
-            Console.Write("Molim unesite svoje ime: ");
-            string FirstName = Console.ReadLine().Trim();
-            Console.Write("Molim unesite svoje prezime: ");
-            string LastName = Console.ReadLine().Trim();
-            Auxiliary.TestInputName("", FirstName, LastName);
+            try
+            {
+                Auxiliary.LoadData();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("****************************\n" +
+                    "Greška: Nema podataka u bazi\n" +
+                    "****************************\n");
+            }
+
+            ProcessingReviewer.SelectEntry();            
           
         }
 
@@ -36,8 +45,10 @@ namespace WineReview
         /// Main menu
         /// asks users to pick one entry
         /// </summary>        
-        public static void Menu()
+        public void Menu()
         {
+            var processingEventPlace = new ProcessingEventPlace(); 
+
             Console.WriteLine("*****************\n" +
                 "Glavni izbornik: \n1.Popis događaja\n2.Vina\n3.Recenzije\n" +
                 "*****************");
@@ -46,7 +57,7 @@ namespace WineReview
             {
                 case 1:
                     //Console.WriteLine("upisan 1");
-                    ProcessingEventPlace.ShowEventsMenu();
+                    processingEventPlace.ShowEventsMenu();
                     break;
                 case 2:
                     Console.WriteLine("upisan 2");
