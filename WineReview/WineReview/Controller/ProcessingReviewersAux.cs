@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
+using System.Runtime.InteropServices.Marshalling;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -16,92 +17,47 @@ namespace WineReview.Controller
        
         public ProcessingReviewersAux() 
         {
-            Reviewers = new List<Reviewer>();
-            
+            Reviewers = new List<Reviewer>();            
         }
-
 
 
         /// <summary>
-        /// Tests correct input of given first and last name (only letters, not numbers or special characters)
+        /// Saves data about new user (reviewer)
         /// </summary>
-        internal string TestInputSignInData(string message, string firstName, string lastName,
-            string email, string pass)
+        internal static void SaveReviewer()
         {
-            var ProcessingReviewer = new ProcessingReviewer();
-            try
-            {
-                try
-                {
-                    TestName(firstName, lastName);
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Ime i/ili prezime nisu dobro uneseni,\n" +
-                        "molim unijeti samo slova bez brojeva i/ili posebnih znakova");
-                    ProcessingReviewer.SelectEntry();
+            //Console.WriteLine("\nPozdrav \n{0} {1}\n{2} {3}", firstName, lastName, email, pass);
 
-                }
-                try
-                {
-                    IsValidEmail(email);
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Email nije dobro unesen\n"                                            );
-                    ProcessingReviewer.SelectEntry(); 
-                }
-                try
-                {
-                    TestPassword(pass);
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Lozinka nije dobro unesena\n");
-                    ProcessingReviewer.SelectEntry();
-                }
-             
-              
-              
-                Console.WriteLine("\nPozdrav {0} {1}\n{2} {3}", firstName, lastName, email, pass);
-              
-                Reviewers.Add(new()
-                {
-                    FirstName = firstName,
-                    LastName = lastName,
-                    Email = email,
-                    Password = pass
-                });
-                Auxiliary.SaveData(Reviewers);
-            }
-            catch (Exception)
-            {
-                
-                Console.WriteLine("Unos nije ispravan,\nmolim ponoviti unos");
-                ProcessingReviewer.SelectEntry();
-            }
-            return message;
+            ////creates list of data (user signin) to enter into DB
+            //Reviewers.Add(new()
+            //{
+            //    Id = 1,
+            //    FirstName = firstName,
+            //    LastName = lastName,
+            //    Email = email,
+            //    Password = pass
+            //});
+            //Auxiliary.SaveData(Reviewers);
+
+
+           //Console.WriteLine("Unos nije ispravan,\nmolim ponoviti unos");
         }
 
         //test for entered first and last name
-        private static void TestName(string fn, string ln)
+        public static void TestName(string name)
         {
-            if (Regex.IsMatch(fn, @"^[a-zA-Z]+$") == false &&
-                   Regex.IsMatch(ln, @"^[a-zA-Z]+$") == false
-                   )
+            if (Regex.IsMatch(name, @"^[a-zA-Z]+$") == false)
             {
                 throw new Exception();
             }
         }
 
         //test for entered password
-        private static void TestPassword(string pass)
+        public static void TestPassword(string pass)
         {
             if (Regex.IsMatch(pass, @"^.{4,}") == false)
             {
-
                 throw new Exception();
-
             }
         }
 

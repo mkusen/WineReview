@@ -18,32 +18,54 @@ namespace WineReview
 
         public static void Start()
         {
-            var ProcessingReviewer = new ProcessingReviewer();
-            var Auxiliary = new Auxiliary();
-
+                   
             Console.WriteLine("***********************\n" +
                               "Dobrodošli u aplikaciju\n" +
                               "za ljubitelje vina\n" +
                               "***********************\n");
+
+            //trys to load saved data to login; if fail, starts method to input new user
             try
             {
-                Auxiliary.LoadData();
+                Auxiliary.LoadData();               
             }
-            catch (Exception)
-            {
+            catch (Exception)            {
                 Console.WriteLine("****************************\n" +
                     "Greška: Nema podataka u bazi\n" +
                     "****************************\n");
+
+                ProcessingReviewer.Singin();
             }
 
-            ProcessingReviewer.SelectEntry();            
-          
+            ChooseLoginOrSingin();
+
         }
 
 
         /// <summary>
-        /// Main menu
-        /// asks users to pick one entry
+        /// Menu to select login or singin
+        /// </summary>
+        private static void ChooseLoginOrSingin()
+        {
+            Console.WriteLine("****************\nMolim odabrati: \n" +
+                "1. Postojeći korisnik\n" +
+                "2. Novi korisnik\n****************");
+
+            switch (Auxiliary.TestInputNumbers("Molim odabrati", 1, 2))
+            {
+                case 1:
+                    ProcessingReviewer.Select(1);
+                    break;
+                case 2:
+                    ProcessingReviewer.Select(2);
+                    break;
+            }
+
+        }
+
+
+        /// <summary>
+        /// Main menu asks users to pick one entry
         /// </summary>        
         public void Menu()
         {

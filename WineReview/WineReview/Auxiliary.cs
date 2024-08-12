@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 using WineReview.Controller;
 using WineReview.Model;
 
@@ -57,18 +58,34 @@ namespace WineReview
         /// <summary>
         /// Loads saved data at app start
         /// </summary>
-        public void LoadData()
+        public static void LoadData()
         {
             string docPath =
          Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                        
-                if (File.Exists(Path.Combine(docPath, "data.json")))
-                {
-                    StreamReader file = File.OpenText(Path.Combine(docPath, "data.json"));
-                   JsonConvert.DeserializeObject<List<Reviewer>>(file.ReadToEnd());
+         
 
-                }throw new Exception();
+            if (File.Exists(Path.Combine(docPath, "data.json")))
+            {                
+                StreamReader file = File.OpenText(Path.Combine(docPath, "data.json"));
+                var data = JsonConvert.DeserializeObject<List<Reviewer>>(file.ReadToEnd());          
+
+                foreach (var item in data)
+                {
+                    var id = item.Id;
+                    var fn = item.FirstName;
+                    var ln = item.LastName;
+                    var email = item.Email;
+                    var pass = item.Password;
+                    //Console.WriteLine("{0} {1} {2} {3} {4}", id, fn, ln, email, pass);
+                }
+              
+
+            }
+            else {
+
+                throw new Exception(); }  
            
+
         }
 
         /// <summary>
