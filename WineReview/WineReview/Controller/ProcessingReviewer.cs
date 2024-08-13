@@ -11,9 +11,9 @@ namespace WineReview.Controller
     internal class ProcessingReviewer
     {
 
-        public ProcessingReviewer() 
+        public ProcessingReviewer()
         {
-           
+
         }
 
         internal static void Select(int selectedNum)
@@ -35,59 +35,90 @@ namespace WineReview.Controller
             var Email = Console.ReadLine().Trim();
             Console.Write("Molim unesite lozinku: ");
             var Password = Console.ReadLine().Trim();
+
+            GetUser(Email, Password);
         }
 
-        public static void Singin()
+        private static void GetUser(string eml, string pass)
         {
+           
+            
+            
+            
+            throw new NotImplementedException();
+        }
+
+        internal static void Singin()
+        {
+            ProcessingReviewersAux processingReviewersAux = new ProcessingReviewersAux();   
+            string FirstName;
+            string LastName;
+            string Email;
+            string Password;
             while (true)
             {
                 Console.Write("Molim unesite svoje ime: ");
                 try
                 {
-                    var FirstName = Console.ReadLine().Trim();
+                    FirstName = Console.ReadLine().Trim();
                     ProcessingReviewersAux.TestName(FirstName);
+                    break;
                 }
                 catch (Exception)
                 {
                     Console.WriteLine("Ime nije dobro upisano");
                 }
+            }
+            while (true)
+            {
                 Console.Write("Molim unesite svoje prezime: ");
                 try
                 {
-                    var LastName = Console.ReadLine().Trim();
+                    LastName = Console.ReadLine().Trim();
                     ProcessingReviewersAux.TestName(LastName);
+                    break;
                 }
                 catch (Exception)
                 {
                     Console.WriteLine("Prezime nije dobro upisano");
                 }
+
+            }
+            while (true)
+            {
                 Console.Write("Molim unesite e-mail: ");
                 try
                 {
-                    var Email = Console.ReadLine().Trim();
+                    Email = Console.ReadLine().Trim();
                     ProcessingReviewersAux.IsValidEmail(Email);
+                    break;
                 }
                 catch (Exception)
                 {
                     Console.WriteLine("Email nije dobro upisan");
                 }
+            }
+
+            while (true)
+            {
 
                 Console.Write("Molim unesite lozinku: ");
                 try
                 {
-                    var Password = Console.ReadLine().Trim();
+                    Password = Console.ReadLine().Trim();
                     ProcessingReviewersAux.TestPassword(Password);
+                    break;
                 }
                 catch (Exception)
                 {
                     Console.WriteLine("Lozinka nije dobro upisana");
                 }
-
-                ProcessingReviewersAux.SaveReviewer();
-
-
             }
 
+            //Auxiliary.GetId(Id);
+
+
+            processingReviewersAux.SaveReviewer(FirstName, LastName, Email, Password);
         }
     }
 }

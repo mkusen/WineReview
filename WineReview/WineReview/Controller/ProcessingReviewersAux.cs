@@ -17,30 +17,35 @@ namespace WineReview.Controller
        
         public ProcessingReviewersAux() 
         {
-            Reviewers = new List<Reviewer>();            
+            Reviewers = new List<Reviewer>();
         }
 
 
         /// <summary>
         /// Saves data about new user (reviewer)
         /// </summary>
-        internal static void SaveReviewer()
+        internal void SaveReviewer(string fn, string ln, string eml, string pass)
         {
-            //Console.WriteLine("\nPozdrav \n{0} {1}\n{2} {3}", firstName, lastName, email, pass);
+            Auxiliary auxiliary = new Auxiliary();
 
-            ////creates list of data (user signin) to enter into DB
-            //Reviewers.Add(new()
-            //{
-            //    Id = 1,
-            //    FirstName = firstName,
-            //    LastName = lastName,
-            //    Email = email,
-            //    Password = pass
-            //});
-            //Auxiliary.SaveData(Reviewers);
+            Console.WriteLine("\nPozdrav \n{0} {1}\n{2} {3}", fn, ln, eml, pass);
+            var id = 0;
+
+            Console.WriteLine(  id + " id in PRX");
+
+            //creates list of data (user signin) to enter into DB
+            Reviewers.Add(new()
+            {
+                Id = ++id,
+                FirstName = fn,
+                LastName = ln,
+                Email = eml,
+                Password = pass
+            });
+            auxiliary.SaveData(Reviewers);
 
 
-           //Console.WriteLine("Unos nije ispravan,\nmolim ponoviti unos");
+            //Console.WriteLine("Unos nije ispravan,\nmolim ponoviti unos");
         }
 
         //test for entered first and last name

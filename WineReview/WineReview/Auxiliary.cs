@@ -7,25 +7,19 @@ namespace WineReview
 {
     internal class Auxiliary
     {
-        ProcessingEventPlace ProcessingEventPlace { get; set; }
-        ProcessingReviewer ProcessingReviewer { get; set; } 
-        ProcessingWine ProcessingWine { get; set; }
-
         public Auxiliary()
         {
-            ProcessingEventPlace = new ProcessingEventPlace();
-            ProcessingReviewer = new ProcessingReviewer();
-            ProcessingWine  = new ProcessingWine();
-
         }
 
-        internal static void GetId()
+        internal int GetId(int id)
         {
             
-            
-            
-            
-            throw new NotImplementedException();
+            for (int i = 0; i < id; i++)
+            {
+                ++id;
+            }
+            return id;
+
         }
 
 
@@ -58,16 +52,16 @@ namespace WineReview
         /// <summary>
         /// Loads saved data at app start
         /// </summary>
-        public static void LoadData()
+        internal static void LoadData()
         {
             string docPath =
          Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-         
+
 
             if (File.Exists(Path.Combine(docPath, "data.json")))
-            {                
+            {
                 StreamReader file = File.OpenText(Path.Combine(docPath, "data.json"));
-                var data = JsonConvert.DeserializeObject<List<Reviewer>>(file.ReadToEnd());          
+                var data = JsonConvert.DeserializeObject<List<Reviewer>>(file.ReadToEnd());
 
                 foreach (var item in data)
                 {
@@ -76,26 +70,43 @@ namespace WineReview
                     var ln = item.LastName;
                     var email = item.Email;
                     var pass = item.Password;
-                    //Console.WriteLine("{0} {1} {2} {3} {4}", id, fn, ln, email, pass);
+                    Console.WriteLine("{0} {1} {2} {3} {4}", id, fn, ln, email, pass);
+
                 }
-              
+
 
             }
-            else {
+            else
+            {
 
-                throw new Exception(); }  
-           
+                throw new Exception();
+            }
+
 
         }
 
         /// <summary>
         /// Save entered data at app close or at user request
         /// </summary>
-        public static void SaveData(List<Reviewer> data)
+        internal void SaveData(List<Reviewer> data)
         {
 
             string docPath =
           Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            //using (StreamWriter sw = new StreamWriter(Path.Combine(docPath, "data.json")))
+            //{
+            //    foreach (var v in data)
+            //    {
+            //        sw.WriteLine(
+            //            v.FirstName,
+            //                v.LastName,
+            //                v.Email, 
+            //                v.Password);
+
+            //        Console.WriteLine(sw + " sw");
+            //    }
+            //}
 
             StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "data.json"));
             outputFile.WriteLine(JsonConvert.SerializeObject(data));

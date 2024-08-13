@@ -29,7 +29,8 @@ namespace WineReview
             {
                 Auxiliary.LoadData();               
             }
-            catch (Exception)            {
+            catch (Exception)           
+            {
                 Console.WriteLine("****************************\n" +
                     "Greška: Nema podataka u bazi\n" +
                     "****************************\n");

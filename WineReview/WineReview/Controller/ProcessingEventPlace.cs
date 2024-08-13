@@ -70,7 +70,7 @@ namespace WineReview.Controller
 
         private void AddNewEvent()
         {
-            Auxiliary.GetId();
+            //Auxiliary.GetId();
             Console.Write("Dodaj novi događaj: ");
             string NewEvent = Console.ReadLine().Trim();
             Events.Add(new() {EventName = NewEvent });
