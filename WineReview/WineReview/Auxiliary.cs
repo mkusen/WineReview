@@ -52,7 +52,7 @@ namespace WineReview
         /// <summary>
         /// Loads saved data at app start
         /// </summary>
-        internal static void LoadData()
+        internal static List<Reviewer>? LoadData()
         {
             string docPath =
          Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -63,18 +63,7 @@ namespace WineReview
                 StreamReader file = File.OpenText(Path.Combine(docPath, "data.json"));
                 var data = JsonConvert.DeserializeObject<List<Reviewer>>(file.ReadToEnd());
 
-                foreach (var item in data)
-                {
-                    var id = item.Id;
-                    var fn = item.FirstName;
-                    var ln = item.LastName;
-                    var email = item.Email;
-                    var pass = item.Password;
-                    Console.WriteLine("{0} {1} {2} {3} {4}", id, fn, ln, email, pass);
-
-                }
-
-
+                return data;
             }
             else
             {
@@ -94,23 +83,18 @@ namespace WineReview
             string docPath =
           Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-            //using (StreamWriter sw = new StreamWriter(Path.Combine(docPath, "data.json")))
-            //{
-            //    foreach (var v in data)
-            //    {
-            //        sw.WriteLine(
-            //            v.FirstName,
-            //                v.LastName,
-            //                v.Email, 
-            //                v.Password);
+            try
+            {
+                StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "data.json"));
+                outputFile.WriteLine(JsonConvert.SerializeObject(data));
+                outputFile.Close();
+            }
+            catch (Exception)
+            {
 
-            //        Console.WriteLine(sw + " sw");
-            //    }
-            //}
-
-            StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "data.json"));
-            outputFile.WriteLine(JsonConvert.SerializeObject(data));
-            outputFile.Close();
+                throw new Exception();
+            }
+          
         }
 
 

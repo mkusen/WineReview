@@ -31,30 +31,106 @@ namespace WineReview.Controller
 
         private static void LogIn()
         {
-            Console.Write("Molim unesite e-mail: ");
-            var Email = Console.ReadLine().Trim();
-            Console.Write("Molim unesite lozinku: ");
-            var Password = Console.ReadLine().Trim();
+            string Email;
+            string Password;
+            while (true)
+            {
+                Console.Write("Molim unesite e-mail: ");
+                try
+                {
+                    Email = Console.ReadLine().Trim();
+                    ProcessingReviewersAux.IsValidEmail(Email);
+                    break;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Email nije upisan");
+                }
+            }
+
+            while (true)
+            {
+
+                Console.Write("Molim unesite lozinku: ");
+                try
+                {
+                    Password = Console.ReadLine().Trim();
+                    ProcessingReviewersAux.TestPassword(Password);
+                    break;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Lozinka nije upisana");
+                }
+
+
+            }
 
             GetUser(Email, Password);
+
         }
 
         private static void GetUser(string eml, string pass)
         {
-           
-            
-            
-            
-            throw new NotImplementedException();
+            int id;
+            string em;
+            string password;
+            string fn;
+            string ln;
+
+            foreach (var item in Auxiliary.LoadData())
+            {
+                id = item.Id;
+                em = item.Email;
+                password = item.Password;
+                fn = item.FirstName;
+                ln = item.LastName;
+
+                do
+                {
+
+                    if (em.Equals(eml) && password.Equals(pass))
+                    {
+                        Console.WriteLine("{0} {1} {2}", id, fn, ln);
+                    }
+
+                    Console.WriteLine(id + " id");
+
+                } while (false);
+
+                if (id==0)
+                {
+
+                    Console.WriteLine("****************************\n" +
+                "Greška: Nema podataka u bazi\n" +
+                "****************************\n"); LogIn();
+                }
+
+            }
+
         }
+
 
         internal static void Singin()
         {
-            ProcessingReviewersAux processingReviewersAux = new ProcessingReviewersAux();   
+            int Id=0;
             string FirstName;
             string LastName;
             string Email;
             string Password;
+
+            try
+            {
+                foreach (var item in Auxiliary.LoadData())
+                {
+                    Id = item.Id;
+                };
+            }
+            catch (Exception)
+            {
+             Id=0;
+            }
+                    
             while (true)
             {
                 Console.Write("Molim unesite svoje ime: ");
@@ -114,11 +190,8 @@ namespace WineReview.Controller
                     Console.WriteLine("Lozinka nije dobro upisana");
                 }
             }
-
-            //Auxiliary.GetId(Id);
-
-
-            processingReviewersAux.SaveReviewer(FirstName, LastName, Email, Password);
+            ProcessingReviewersAux processingReviewersAux = new ProcessingReviewersAux();   
+            processingReviewersAux.SaveReviewer(Id, FirstName, LastName, Email, Password);
         }
     }
 }

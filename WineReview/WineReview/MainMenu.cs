@@ -24,20 +24,6 @@ namespace WineReview
                               "za ljubitelje vina\n" +
                               "***********************\n");
 
-            //trys to load saved data to login; if fail, starts method to input new user
-            try
-            {
-                Auxiliary.LoadData();               
-            }
-            catch (Exception)           
-            {
-                Console.WriteLine("****************************\n" +
-                    "Greška: Nema podataka u bazi\n" +
-                    "****************************\n");
-
-                ProcessingReviewer.Singin();
-            }
-
             ChooseLoginOrSingin();
 
         }

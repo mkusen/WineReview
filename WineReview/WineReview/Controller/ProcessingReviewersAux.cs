@@ -24,28 +24,36 @@ namespace WineReview.Controller
         /// <summary>
         /// Saves data about new user (reviewer)
         /// </summary>
-        internal void SaveReviewer(string fn, string ln, string eml, string pass)
+        internal void SaveReviewer(int id, string fn, string ln, string eml, string pass)
         {
             Auxiliary auxiliary = new Auxiliary();
 
             Console.WriteLine("\nPozdrav \n{0} {1}\n{2} {3}", fn, ln, eml, pass);
-            var id = 0;
 
-            Console.WriteLine(  id + " id in PRX");
 
             //creates list of data (user signin) to enter into DB
-            Reviewers.Add(new()
+            try
             {
-                Id = ++id,
-                FirstName = fn,
-                LastName = ln,
-                Email = eml,
-                Password = pass
-            });
-            auxiliary.SaveData(Reviewers);
+                Reviewers.Add(new()
+                {
+                    Id = id + 1,
+                    FirstName = fn,
+                    LastName = ln,
+                    Email = eml,
+                    Password = pass
+
+                });
+                auxiliary.SaveData(Reviewers);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Došlo je do pogreške, pokušajte ponovno");
+                ProcessingReviewer.Singin();
+            }
+         
 
 
-            //Console.WriteLine("Unos nije ispravan,\nmolim ponoviti unos");
+           
         }
 
         //test for entered first and last name
