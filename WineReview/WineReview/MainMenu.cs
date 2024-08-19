@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WineReview.Controller;
+using WineReview.Interface;
 
 namespace WineReview
 {
-    internal class MainMenu
+    internal class MainMenu : IMainMenu
     {
         
 
@@ -23,16 +24,14 @@ namespace WineReview
                               "Dobrodošli u aplikaciju\n" +
                               "za ljubitelje vina\n" +
                               "***********************\n");
-
             ChooseLoginOrSingin();
-
         }
 
 
         /// <summary>
         /// Menu to select login or singin
         /// </summary>
-        private static void ChooseLoginOrSingin()
+        public static void ChooseLoginOrSingin()
         {
             Console.WriteLine("****************\nMolim odabrati: \n" +
                 "1. Postojeći korisnik\n" +
@@ -65,7 +64,6 @@ namespace WineReview
             switch (Auxiliary.TestInputNumbers("Molim odabrati", 1, 3))
             {
                 case 1:
-                    //Console.WriteLine("upisan 1");
                     processingEventPlace.ShowEventsMenu();
                     break;
                 case 2:

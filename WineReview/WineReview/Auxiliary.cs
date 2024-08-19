@@ -11,19 +11,6 @@ namespace WineReview
         {
         }
 
-        internal int GetId(int id)
-        {
-            
-            for (int i = 0; i < id; i++)
-            {
-                ++id;
-            }
-            return id;
-
-        }
-
-
-
         /// <summary>
         /// Tests correct input from menu list
         /// </summary>
@@ -56,22 +43,17 @@ namespace WineReview
         {
             string docPath =
          Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
-
             if (File.Exists(Path.Combine(docPath, "data.json")))
             {
                 StreamReader file = File.OpenText(Path.Combine(docPath, "data.json"));
                 var data = JsonConvert.DeserializeObject<List<Reviewer>>(file.ReadToEnd());
-
-                return data;
-            }
-            else
-            {
-
+                if (data != null)
+                {
+                    return data;
+                }
                 throw new Exception();
-            }
-
-
+            }throw new Exception();
+           
         }
 
         /// <summary>
@@ -87,6 +69,7 @@ namespace WineReview
             {
                 StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "data.json"));
                 outputFile.WriteLine(JsonConvert.SerializeObject(data));
+                outputFile.Flush();
                 outputFile.Close();
             }
             catch (Exception)

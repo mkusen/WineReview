@@ -26,9 +26,9 @@ namespace WineReview.Controller
         /// </summary>
         internal void SaveReviewer(int id, string fn, string ln, string eml, string pass)
         {
-            Auxiliary auxiliary = new Auxiliary();
+            Auxiliary auxiliary = new();
 
-            Console.WriteLine("\nPozdrav \n{0} {1}\n{2} {3}", fn, ln, eml, pass);
+            Console.WriteLine("\nPozdrav \n{0} {1}\n{2} {3} {4}", id, fn, ln, eml, pass);
 
 
             //creates list of data (user signin) to enter into DB
@@ -36,7 +36,7 @@ namespace WineReview.Controller
             {
                 Reviewers.Add(new()
                 {
-                    Id = id + 1,
+                    Id = id,
                     FirstName = fn,
                     LastName = ln,
                     Email = eml,
@@ -48,11 +48,8 @@ namespace WineReview.Controller
             catch (Exception)
             {
                 Console.WriteLine("Došlo je do pogreške, pokušajte ponovno");
-                ProcessingReviewer.Singin();
+                ProcessingReviewer.SingIn();
             }
-         
-
-
            
         }
 

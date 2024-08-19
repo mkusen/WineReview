@@ -4,19 +4,19 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WineReview.Interface;
 using WineReview.Model;
 
 namespace WineReview.Controller
 {
-    internal class ProcessingReviewer
+    internal class ProcessingReviewer : IProcesingReviewer
     {
 
         public ProcessingReviewer()
         {
-
         }
 
-        internal static void Select(int selectedNum)
+        public static void Select(int selectedNum)
         {
             if (selectedNum == 1)
             {
@@ -24,12 +24,12 @@ namespace WineReview.Controller
             }
             else
             {
-                Singin();
+                SingIn();
             }
 
         }
 
-        private static void LogIn()
+        public static void LogIn()
         {
             string Email;
             string Password;
@@ -63,14 +63,13 @@ namespace WineReview.Controller
                     Console.WriteLine("Lozinka nije upisana");
                 }
 
-
             }
 
             GetUser(Email, Password);
 
         }
 
-        private static void GetUser(string eml, string pass)
+        public static void GetUser(string eml, string pass)
         {
             int id;
             string em;
@@ -78,40 +77,42 @@ namespace WineReview.Controller
             string fn;
             string ln;
 
-            foreach (var item in Auxiliary.LoadData())
+            try
             {
-                id = item.Id;
-                em = item.Email;
-                password = item.Password;
-                fn = item.FirstName;
-                ln = item.LastName;
 
-                do
+                foreach (var item in Auxiliary.LoadData())
                 {
+                    id = item.Id;
+                    em = item.Email;
+                    password = item.Password;
+                    fn = item.FirstName;
+                    ln = item.LastName;
 
-                    if (em.Equals(eml) && password.Equals(pass))
+                    while (true)
                     {
-                        Console.WriteLine("{0} {1} {2}", id, fn, ln);
+
+                        if (em.Equals(eml) && password.Equals(pass))
+                        {
+                            Console.WriteLine("{0} {1} {2}", id, fn, ln);
+                        }
+                        break;                      
+
                     }
 
-                    Console.WriteLine(id + " id");
-
-                } while (false);
-
-                if (id==0)
-                {
-
-                    Console.WriteLine("****************************\n" +
-                "Greška: Nema podataka u bazi\n" +
-                "****************************\n"); LogIn();
                 }
-
             }
 
+            catch (Exception)
+            {
+                Console.WriteLine("****************************\n" +
+            "Greška: Nema podataka u bazi\n" +
+            "Pokušaj ponovno\n" +
+            "****************************\n");
+                MainMenu.ChooseLoginOrSingin();               
+            }
         }
 
-
-        internal static void Singin()
+        public static void SingIn()
         {
             int Id=0;
             string FirstName;
@@ -123,12 +124,14 @@ namespace WineReview.Controller
             {
                 foreach (var item in Auxiliary.LoadData())
                 {
-                    Id = item.Id;
+                    Id = ++item.Id;
+                  
                 };
             }
             catch (Exception)
             {
-             Id=0;
+               
+                Id =1;
             }
                     
             while (true)
@@ -190,7 +193,7 @@ namespace WineReview.Controller
                     Console.WriteLine("Lozinka nije dobro upisana");
                 }
             }
-            ProcessingReviewersAux processingReviewersAux = new ProcessingReviewersAux();   
+            ProcessingReviewersAux processingReviewersAux = new();   
             processingReviewersAux.SaveReviewer(Id, FirstName, LastName, Email, Password);
         }
     }
