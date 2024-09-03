@@ -34,7 +34,7 @@ insert into event_places (country, city,place_name, event_name) values ('hr', 'O
 
 --select * from event_places as e inner join reviewers as r on e.id=r.id inner join wines as w on w.id=r.id;
 
-insert into tasting (id_reviewer, id_wine, id_event_place, review, event_date) values (1,1,1,'vrhunsko bijelo vino','2024-02-01'),
+insert into tastings (id_reviewer, id_wine, id_event_place, review, event_date) values (1,1,1,'vrhunsko bijelo vino','2024-02-01'),
 (2,2,2,'vrhunsko bijelo vino','2024-02-02'),
 (3,3,3,'vrhunsko bijelo vino','2024-02-03'),
 (4,4,4,'vrhunsko crno vino','2024-02-04'),
@@ -47,15 +47,28 @@ insert into tasting (id_reviewer, id_wine, id_event_place, review, event_date) v
 (5,11,5,'vrhunsko crno vino','2024-02-11'),
 (6,12,6,'vrhunsko bijelo vino','2024-02-12');
 
---select * from tasting;
+--select * from tastings;
 
--- select t.id, r.firstname, r.lastname, e.place_name, e.city, event_date, wine_name, year_of_harvest from tasting as t join reviewers as r on t.id=r.id
+-- select t.id, r.firstname, r.lastname, e.place_name, e.city, event_date, wine_name, year_of_harvest from tastings as t join reviewers as r on t.id=r.id
 -- join wines as w on t.id=w.id
 -- join event_places as e on t.id=e.id
 -- where t.id=3;
 
 -- select d.city, d.place_name, d.event_name, b.maker, b.wine_name, a.review from 
--- tasting a inner join wines b on b.id = a.id_wine 
+-- tastings a inner join wines b on b.id = a.id_wine 
 -- inner join reviewers c on c.id = a.id_reviewer 
 -- inner join event_places d on d.id = a.id_event_place 
 -- where b.maker LIKE '%kr%';
+
+select * from reviewers where id=1;
+select*from wines where  id=1;
+select * from event_places where id=1;
+
+select * from tastings where id=14;
+
+
+ select t.id, r.firstname, r.lastname, e.place_name, e.city,e.event_name, t.event_date, w.wine_name, w.maker, w.year_of_harvest, t.review, w.price from tastings as t 
+ join reviewers as r on r.id =t.id_reviewer
+ join wines as w on w.id=t.id_wine
+ join event_places as e on e.id=t.id_event_place
+ where t.id=14;
